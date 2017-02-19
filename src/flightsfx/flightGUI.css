@@ -1,0 +1,116 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20-Dec-2016, 13:01:27
+    Author     : TDC
+*/
+
+.root{ 
+    -fx-background: rgb(0,0,0);   
+}
+
+#txtTitle{
+
+    -fx-background-color: none;
+    -fx-text-fill: white;
+    -fx-font-size: 60px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+
+}
+
+#lblTime{
+    -fx-font-family: "Digital-7 Mono";
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+    -fx-alignment: center;
+    -fx-border: 5px;
+    -fx-background-radius: 10;
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-background-color: rgb(45,45,45);
+}
+
+#lblPages{
+    -fx-background-color: rgb(35, 36, 38);
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.table-view .column-header .label {
+    -fx-font-family: "Digital-7 Mono";
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+    -fx-padding: 5px;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: rgb(35, 36, 38);
+    -fx-border-color: rgb(35, 36, 38);
+}
+
+
+.table-view .table-cell{
+    -fx-font-weight:bold;
+    -fx-text-fill:white;
+    -fx-font-size:27px;
+    -fx-alignment: center;
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #616161;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.root .table-view{
+  -fx-background-color: none;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #424242;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0px;  
+}
+
+.table-row-cell:empty {
+    -fx-background-color: none;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+.table-view{   
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 0.0em;
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.scroll-bar:vertical{
+    -fx-opacity: 0;
+    -fx-padding:-7;
+}
+
+#gpNotifications{
+    -fx-background-color: green;
+    -fx-background-radius: 30px;
+    -fx-border-color: black;
+    -fx-border-width: 10px;
+    -fx-border-radius:20px;
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 30, 0, 0, 0);
+}
+
+#txtNotifications{
+    -fx-text-fill: white;
+    -fx-background-color: none;
+    -fx-font-size: 64px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+
