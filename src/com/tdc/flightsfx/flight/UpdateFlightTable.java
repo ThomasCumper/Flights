@@ -25,7 +25,7 @@ import javafx.collections.ObservableList;
 //
 public class UpdateFlightTable {
 
-    private final Dbconnection connection = new Dbconnection("jdbc:mysql://192.168.0.14:3306/Flights", "szySvcAccount", "FastC4r");
+    private final Dbconnection connection = new Dbconnection("jdbc:mysql://192.168.0.14:3306/Flights", "SvcAccount", "FastC4r");
     private Connection con;
 
     private CallableStatement stmt = null;
