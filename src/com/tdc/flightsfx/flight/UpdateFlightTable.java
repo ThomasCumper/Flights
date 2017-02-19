@@ -7,6 +7,8 @@ package com.tdc.flightsfx.flight;
 
 import com.tdc.flightsfx.connect.Dbconnection;
 import flightsfx.FXMLDocumentController;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -14,6 +16,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,17 +30,40 @@ import javafx.collections.ObservableList;
 //
 public class UpdateFlightTable {
 
-    private final Dbconnection connection = new Dbconnection("jdbc:mysql://192.168.0.14:3306/Flights", "SvcAccount", "FastC4r");
+    private final Properties prop = new Properties();
+    private FileInputStream in = null;
+    
+    private Dbconnection connection = null;
     private Connection con;
+    private String url,username,password;
 
     private CallableStatement stmt = null;
     private ResultSet rs = null;
+    
+    {
+        try {
+            in = new FileInputStream("G:\\Google Drive\\flightFX.properties");
+            prop.load(in);
+            in.close();
+            
+            url = prop.getProperty("jdbc.url");
+            username = prop.getProperty("jdbc.username");
+            password = prop.getProperty("jdbc.password");
+            
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(UpdateFlightTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     private final ObservableList<FlightInfo> flightList = FXCollections.observableArrayList();
 
     /* Gets data from SQL database and populates into ObservableList */
     public void getTableData(FXMLDocumentController controller) throws SQLException, ParseException, IOException {
-
+        
+        connection = new Dbconnection(url,username,password);
+        
         con = connection.connect();
 
         stmt = con.prepareCall("{CALL `Flights`.`sp_Select_All_Flights`}");
