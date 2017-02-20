@@ -96,5 +96,11 @@ public class UpdateFlightTable {
         controller.updateDebugLabel("Table updated: "+date);
         controller.populateTable(flightList);
     }
+    
+    public ObservableList getFlightList(){
+        
+       return flightList;
+       
+    }
 
 }

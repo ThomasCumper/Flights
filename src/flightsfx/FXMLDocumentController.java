@@ -67,6 +67,7 @@ public class FXMLDocumentController implements Initializable {
 
         Timer timer = new Timer();
         UpdateFlightTable flightTT = new UpdateFlightTable();
+
         setColumnWidth();
         try {
 
@@ -95,7 +96,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void updateTimeLabel(String currentTime) {
-
+        
         lblTime.setText(currentTime);
     }
 
@@ -144,7 +145,6 @@ public class FXMLDocumentController implements Initializable {
             return new TableCell<FlightInfo, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
-
                    statusColor statColor = new statusColor(item);
                    TableRow<FlightInfo> currentRow = getTableRow();
                    currentRow.setStyle(statColor.getCellColor());
@@ -153,7 +153,7 @@ public class FXMLDocumentController implements Initializable {
             };
         });
     }
-    
+
     private void getNumberofRows(TableView tblFlights){
         
         NumberofFlights NoOfFlights = new NumberofFlights (tblFlights.getItems().size(),doc);
