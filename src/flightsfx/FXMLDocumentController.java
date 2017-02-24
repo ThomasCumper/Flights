@@ -2,6 +2,7 @@ package flightsfx;
 
 import com.tdc.flightsfx.flight.UpdateFlightTable;
 import com.tdc.flightsfx.flight.FlightInfo;
+import com.tdc.flightsfx.flight.UpdateFlightNotification;
 import com.tdc.flightsfx.flight.statusColor;
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -40,6 +42,8 @@ public class FXMLDocumentController implements Initializable {
     private Label lblDebug;
     @FXML
     public ImageView imgAirlines;
+    @FXML
+    public GridPane gpNotifications;
     @FXML
     private TextField txtNotifications;
     @FXML
@@ -64,6 +68,8 @@ public class FXMLDocumentController implements Initializable {
 
         Timer timer = new Timer();
         UpdateFlightTable flightTT = new UpdateFlightTable();
+        UpdateFlightNotification udFlightNote = new UpdateFlightNotification(doc,tblFlights);
+        udFlightNote.start();
 
         setColumnWidth();
         try {
@@ -101,6 +107,14 @@ public class FXMLDocumentController implements Initializable {
 
         txtNotifications.setText(notification);
 
+
+    }
+    
+    public void setUpdateNotificationStyle(String style){
+        
+     gpNotifications.setStyle(style);
+        txtNotifications.setStyle(style);
+                
     }
 
     public void updatePageLabel(String pages) {
@@ -148,6 +162,11 @@ public class FXMLDocumentController implements Initializable {
                 }
             };
         });
+    }
+    
+    public int getRowCount(){
+        
+        return tblFlights.getItems().size();
     }
 
     private void getNumberofRows(TableView tblFlights){
