@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author Tom Cumper
+ * @author TDC
  */
 public class CheckFlightStatus {
 

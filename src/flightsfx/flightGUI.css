@@ -78,11 +78,16 @@ and open the template in the editor.
 }
 
 .table-row-cell:empty {
-    -fx-background-color: none;
+    -fx-background-color: black;
 }
 
 .table-row-cell:empty .table-cell {
     -fx-border-width: 0px;
+}
+
+.table-row-cell:selected{
+    
+    -fx-table-cell-border-color: transparent; 
 }
 
 .table-view{   

@@ -32,9 +32,21 @@ public class Time {
                 Platform.runLater(() -> {
                     date = new Date();
                     controller.updateTimeLabel(df.format(date));
+             
                 });
             }
-        }, 0, 10000);
+        }, 0, 1000);
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
 
     }
 

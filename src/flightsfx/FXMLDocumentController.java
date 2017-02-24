@@ -33,7 +33,7 @@ import javafx.scene.image.ImageView;
 
 /**
  *
- * @author Tom Cumper
+ * @author TDC
  */
 public class FXMLDocumentController implements Initializable {
 
@@ -48,7 +48,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField txtNotifications;
     @FXML
-    private TableView<FlightInfo> tblFlights;
+    public TableView<FlightInfo> tblFlights;
     @FXML
     private TableColumn<FlightInfo, String> flightID;
     @FXML
@@ -61,6 +61,8 @@ public class FXMLDocumentController implements Initializable {
     private TableColumn<FlightInfo, String> status;
 
     private final FXMLDocumentController doc = this;
+    
+   
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -125,7 +127,6 @@ public class FXMLDocumentController implements Initializable {
         flightTime.setCellValueFactory(new PropertyValueFactory<>("flightTime"));
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
         tblFlights.setItems(list);
-
         updateCellColor();
         getNumberofRows(tblFlights);
     }
@@ -157,7 +158,7 @@ public class FXMLDocumentController implements Initializable {
     private void getNumberofRows(TableView tblFlights){
         
         NumberofFlights NoOfFlights = new NumberofFlights (tblFlights.getItems().size(),doc);
-        
+  
     }
 
 }

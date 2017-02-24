@@ -25,7 +25,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author Tom Cumper
+ * @author TDC
  */
 //
 public class UpdateFlightTable {

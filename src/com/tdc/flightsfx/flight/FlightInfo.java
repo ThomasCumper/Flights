@@ -9,7 +9,6 @@ import flightsfx.FXMLDocumentController;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
 import javafx.beans.property.SimpleStringProperty;
