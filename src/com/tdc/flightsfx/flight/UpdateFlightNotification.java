@@ -34,40 +34,41 @@ public class UpdateFlightNotification extends Thread {
                   if(checkStatus(view.getSelectionModel().getSelectedItem().getStatus())){
                       try {
                           doc.updateNotification(view.getSelectionModel().getSelectedItem().getFlightID()+" to "+view.getSelectionModel().getSelectedItem().getDestination()+" "+view.getSelectionModel().getSelectedItem().getStatus());
-                          Thread.currentThread().sleep(20000);
+                          Thread.currentThread().sleep(5000);
                       } catch (InterruptedException | SQLException ex) {
                           System.out.println(ex.getMessage());
                       }       
-                  }     } catch (SQLException ex) {
-                  Logger.getLogger(UpdateFlightNotification.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+                  } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
               }
              }
             
         }
 
     } 
+   
     
-  
   private boolean checkStatus(String status){
       
       boolean displayNotification = false;
       
       if (status.startsWith("Boarding")){
           displayNotification = true;
-          doc.setUpdateNotificationStyle("-fx-background-color: Blue;" + "-fx-border-width: none;" + "-fx-border-color: transparent;");
+          doc.setUpdateNotificationStyle("-fx-background-color: Blue;");
       }
               
       if (status.endsWith("Closing")){
           displayNotification = true;
-          doc.setUpdateNotificationStyle("-fx-background-color: rgb(145,0,245);" + "-fx-border-width: none;" + "-fx-border-color: transparent;");
+          doc.setUpdateNotificationStyle("-fx-background-color: rgb(145,0,245);");
       }
       if (status.contains("Closed")){
           displayNotification = true;
-           doc.setUpdateNotificationStyle("-fx-background-color: rgb(196,0,0);");  
+          doc.setUpdateNotificationStyle("-fx-background-color: rgb(196,0,0);");
       }
       if (status.endsWith("Departed")){
           displayNotification = true;
-          doc.setUpdateNotificationStyle("-fx-background-color: Green;" + "-fx-border-width: none;" + "-fx-border-color: transparent;");
+          doc.setUpdateNotificationStyle("-fx-background-color: Green;");
       }
       
       return displayNotification;

@@ -13,6 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 /**
  *
@@ -104,16 +106,23 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void updateNotification(String notification) {
-
+        fadeIn();
         txtNotifications.setText(notification);
-
-
     }
     
-    public void setUpdateNotificationStyle(String style){
+    private void fadeIn(){
+        FadeTransition ft = new FadeTransition(Duration.millis(2000), txtNotifications);
+        ft.setFromValue(0);
+        ft.setToValue(1);
+        ft.setAutoReverse(true);
+        ft.setCycleCount(2);
+        ft.play(); 
+    }
+    
+
+    public void setUpdateNotificationStyle(String Style){
         
-     gpNotifications.setStyle(style);
-        txtNotifications.setStyle(style);
+     gpNotifications.setStyle(Style);
                 
     }
 
