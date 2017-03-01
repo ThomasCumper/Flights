@@ -72,7 +72,7 @@ public class FXMLDocumentController implements Initializable {
         Timer timer = new Timer();
         UpdateFlightTable flightTT = new UpdateFlightTable();
         UpdateFlightNotification udFlightNote = new UpdateFlightNotification(doc,tblFlights);
-        udFlightNote.start();
+        udFlightNote.updateNotification();
 
         setColumnWidth();
         try {

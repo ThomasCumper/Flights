@@ -1,16 +1,24 @@
 package com.tdc.flightsfx.flightdata;
 
 import com.tdc.flightsfx.ui.FXMLDocumentController;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.TableView;
 
 /**
  *
  * @author TDC
  */
-public class UpdateFlightNotification extends Thread {
+public class UpdateFlightNotification {
 
-    TableView<FlightInfo> view;
-    FXMLDocumentController doc;
+    private TableView<FlightInfo> view;
+    private FXMLDocumentController doc;
+    private Timer timer = new Timer();
+
+    private static int currentRow = 0;
 
     public UpdateFlightNotification(FXMLDocumentController doc, TableView<FlightInfo> view) {
 
@@ -18,34 +26,58 @@ public class UpdateFlightNotification extends Thread {
         this.view = view;
     }
 
-    public synchronized void run() {
+    public void updateNotification() {
 
-        int check = -1;
-        while (!isInterrupted()) {
+        timer.scheduleAtFixedRate(new TimerTask() {
 
-            for (int i = 0; i <= doc.getRowCount(); i++) {
-                System.out.println(i);
-                if (i>doc.getRowCount())
-                    i=0;
-                  
-            try {
-                    view.getSelectionModel().select(i);
-               
-                    if (checkStatus(view.getSelectionModel().getSelectedItem().getStatus()) && i!=check) {   
-                            doc.updateNotification(view.getSelectionModel().getSelectedItem().getFlightID() + " to " + view.getSelectionModel().getSelectedItem().getDestination() + " " + view.getSelectionModel().getSelectedItem().getStatus()); 
-                           Thread.sleep(6000);
-                            check = i;
-                     }
-                } catch (NullPointerException ex) {
-                    System.out.println("NullPointer - UFN Thread: "+ex.getMessage());
-                }catch (InterruptedException ex) {
-                    System.out.println("InterruptedException - UFN Thread: "+ex.getMessage());
-                }
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
 
-        }
+                    if (currentRow > doc.getRowCount()) {
+                        currentRow = 0;
+                    }
+                            
+                    try {
+                        view.getSelectionModel().select(currentRow);
+
+                        if (checkStatus(view.getSelectionModel().getSelectedItem().getStatus())) {
+                                setNotification();
+                                currentRow++;
+                        } else if(!checkStatus(view.getSelectionModel().getSelectedItem().getStatus()) && currentRow == 0){
+                                setBlank();
+                                currentRow++;
+                        }else{
+                            currentRow=0;
+                            run();
+                        }
+                        
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+
+                });
+            }
+        }, 0, 15000);
 
     }
- }
+
+    private void setNotification() {
+
+        doc.updateNotification(view.getSelectionModel().getSelectedItem().getFlightID()
+                + " to "
+                + view.getSelectionModel().getSelectedItem().getDestination()
+                + " "
+                + view.getSelectionModel().getSelectedItem().getStatus());
+    }
+
+    private void setBlank() {
+
+        doc.setUpdateNotificationStyle("-fx-background-color: Green;");
+        doc.updateNotification("COSTA COFFEE");
+        
+    }
+
     private boolean checkStatus(String status) {
 
         boolean displayNotification = false;
