@@ -1,6 +1,6 @@
-package com.tdc.flightsfx.flight;
+package com.tdc.flightsfx.flightdata;
 
-import flightsfx.FXMLDocumentController;
+import com.tdc.flightsfx.ui.FXMLDocumentController;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
@@ -38,6 +38,7 @@ public class FlightInfo {
         this.airlinePrefix = airlinePrefix;
         this.img = new Image(airlineLogo);
         this.controller = controller;
+        setStatus();
     }
 
     public String getFlightID() {
@@ -70,8 +71,13 @@ public class FlightInfo {
         
         return gate;
     }
+    
+    public String getStatus(){
+        
+        return status.get();
+    }
 
-    public String getStatus() throws SQLException {
+    public String setStatus() throws SQLException {
 
         try {
 
@@ -83,5 +89,5 @@ public class FlightInfo {
         }
         return status.get();
     }
-
+    
 }

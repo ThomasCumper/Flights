@@ -1,7 +1,8 @@
-package com.tdc.flightsfx.flight;
+package com.tdc.flightsfx.flightdata;
 
+import com.tdc.flightsfx.flightdata.FlightInfo;
 import com.tdc.flightsfx.connect.Dbconnection;
-import flightsfx.FXMLDocumentController;
+import com.tdc.flightsfx.ui.FXMLDocumentController;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;

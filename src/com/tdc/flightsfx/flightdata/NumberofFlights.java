@@ -1,4 +1,6 @@
-package flightsfx;
+package com.tdc.flightsfx.flightdata;
+
+import com.tdc.flightsfx.ui.FXMLDocumentController;
 
 /**
  * 

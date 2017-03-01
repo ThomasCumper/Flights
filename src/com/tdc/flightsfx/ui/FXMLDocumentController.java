@@ -1,9 +1,10 @@
-package flightsfx;
+package com.tdc.flightsfx.ui;
 
-import com.tdc.flightsfx.flight.UpdateFlightTable;
-import com.tdc.flightsfx.flight.FlightInfo;
-import com.tdc.flightsfx.flight.UpdateFlightNotification;
-import com.tdc.flightsfx.flight.statusColor;
+import com.tdc.flightsfx.flightdata.NumberofFlights;
+import com.tdc.flightsfx.flightdata.UpdateFlightTable;
+import com.tdc.flightsfx.flightdata.FlightInfo;
+import com.tdc.flightsfx.flightdata.UpdateFlightNotification;
+import com.tdc.flightsfx.flightdata.statusColor;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -87,10 +88,12 @@ public class FXMLDocumentController implements Initializable {
                             System.out.println(ex.getMessage());
                         } catch (IOException ex) {
                             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IndexOutOfBoundsException ex){
+                            System.out.println("IndexOutOfBoundsException : "+ex.getMessage());
                         }
                     });
                 }
-            }, 0, 15000);
+            }, 0, 16000);
 
             Time time = new Time();
             time.getCurrentTime(this);
@@ -105,25 +108,25 @@ public class FXMLDocumentController implements Initializable {
         lblTime.setText(currentTime);
     }
 
-    public void updateNotification(String notification) {
+    public synchronized void updateNotification(String notification) {
+
         fadeIn();
         txtNotifications.setText(notification);
-    }
+
+      }
     
     private void fadeIn(){
         FadeTransition ft = new FadeTransition(Duration.millis(2000), txtNotifications);
         ft.setFromValue(0);
         ft.setToValue(1);
-        ft.setAutoReverse(true);
-        ft.setCycleCount(2);
         ft.play(); 
     }
     
 
     public void setUpdateNotificationStyle(String Style){
-        
-     gpNotifications.setStyle(Style);
-                
+ 
+         gpNotifications.setStyle(Style);
+    
     }
 
     public void updatePageLabel(String pages) {
@@ -175,7 +178,8 @@ public class FXMLDocumentController implements Initializable {
     
     public int getRowCount(){
         
-        return tblFlights.getItems().size();
+        int size = tblFlights.getItems().size();
+        return size >1 ? size : 0;
     }
 
     private void getNumberofRows(TableView tblFlights){

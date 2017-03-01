@@ -1,4 +1,4 @@
-package com.tdc.flightsfx.flight;
+package com.tdc.flightsfx.flightdata;
 
 import java.sql.SQLException;
 import java.text.DateFormat;

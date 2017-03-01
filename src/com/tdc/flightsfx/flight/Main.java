@@ -1,4 +1,4 @@
-package flightsfx;
+package com.tdc.flightsfx.flight;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +14,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/tdc/flightsfx/ui/FXMLDocument.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-      stage.setFullScreen(true);
+    //  stage.setFullScreen(true);
         stage.show();
         stage.setOnCloseRequest(e -> System.exit(0));
     }
