@@ -1,6 +1,5 @@
 package com.tdc.flightsfx.flightdata;
 
-import com.tdc.flightsfx.flightdata.FlightInfo;
 import com.tdc.flightsfx.connect.Dbconnection;
 import com.tdc.flightsfx.ui.FXMLDocumentController;
 import java.io.FileInputStream;
@@ -65,7 +64,6 @@ public class UpdateFlightTable {
         stmt = con.prepareCall("{CALL `Flights`.`sp_Select_All_Flights`}");
         stmt.execute();
         rs = stmt.getResultSet();
-        controller.updateDebugLabel("Updating table");
         while (rs.next()) {
 
             /*Populate Observable List*/
@@ -88,8 +86,6 @@ public class UpdateFlightTable {
         if (rs != null) 
             rs.close();
         
-        Date date = new Date();
-        controller.updateDebugLabel("Table updated: "+date);
         controller.populateTable(flightList);
     }
     

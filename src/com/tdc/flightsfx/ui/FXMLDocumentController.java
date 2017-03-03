@@ -15,6 +15,8 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -42,8 +44,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label lblPages;
     @FXML
-    private Label lblDebug;
-    @FXML
     public ImageView imgAirlines;
     @FXML
     public GridPane gpNotifications;
@@ -65,15 +65,15 @@ public class FXMLDocumentController implements Initializable {
     private final FXMLDocumentController doc = this;
     
    
-
+    UpdateFlightNotification udFlightNote;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         Timer timer = new Timer();
         UpdateFlightTable flightTT = new UpdateFlightTable();
-        UpdateFlightNotification udFlightNote = new UpdateFlightNotification(doc,tblFlights);
-        udFlightNote.updateNotification();
-
+        udFlightNote = new UpdateFlightNotification(doc,tblFlights);
+        
         setColumnWidth();
         try {
 
@@ -110,18 +110,28 @@ public class FXMLDocumentController implements Initializable {
 
     public synchronized void updateNotification(String notification) {
 
-        fadeIn();
+        fadeInOut();
         txtNotifications.setText(notification);
 
       }
     
-    private void fadeIn(){
-        FadeTransition ft = new FadeTransition(Duration.millis(2000), txtNotifications);
-        ft.setFromValue(0);
-        ft.setToValue(1);
-        ft.play(); 
-    }
     
+    private void fadeInOut(){
+        
+         SequentialTransition fade = new SequentialTransition();
+         FadeTransition fadeIn = new FadeTransition(Duration.millis(2000), txtNotifications);
+         FadeTransition stay = new FadeTransition(Duration.millis(12000), txtNotifications);
+         FadeTransition fadeOut = new FadeTransition(Duration.millis(2000), txtNotifications);
+           fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            stay.setFromValue(1);
+            stay.setToValue(1);
+            fadeOut.setFromValue(1);
+            fadeOut.setToValue(0);
+         fade.getChildren().addAll(fadeIn, stay, fadeOut); 
+         fade.play();
+        
+    }
 
     public void setUpdateNotificationStyle(String Style){
  
@@ -133,12 +143,7 @@ public class FXMLDocumentController implements Initializable {
 
         lblPages.setText(pages);
     }
-    
-    public void updateDebugLabel (String debugMsg){
-        
-        lblDebug.setText(debugMsg);
-    }
-        
+            
     /*Populates Flight tableView*/
     public void populateTable(ObservableList list) {
 
@@ -150,6 +155,7 @@ public class FXMLDocumentController implements Initializable {
         tblFlights.setItems(list);
         updateCellColor();
         getNumberofRows(tblFlights);
+        udFlightNote.updateNotification();
     }
 
     private void setColumnWidth() {

@@ -60,6 +60,7 @@
 .table-row-cell{
     -fx-background-color: -fx-table-cell-border-color, #616161;
     -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 30;
 }
 
 .root .table-view{
@@ -80,14 +81,13 @@
     -fx-border-width: 0px;
 }
 
-.table-row-cell:selected{
-    
+.table-row-cell:selected{   
     -fx-table-cell-border-color: transparent; 
 }
 
 .table-view{   
     -fx-table-cell-border-color: transparent;
-    -fx-padding: 0.0em;
+    -fx-padding: 0;
     -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
@@ -98,10 +98,10 @@
 
 #gpNotifications{
     -fx-background-color: green;
-    -fx-background-radius: 30px;
+    -fx-background-radius: 30;
     -fx-border-color: black;
     -fx-border-width: 10px;
-    -fx-border-radius:20px;
+    -fx-border-radius:20;
     -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 30, 0, 0, 0);
 }
 

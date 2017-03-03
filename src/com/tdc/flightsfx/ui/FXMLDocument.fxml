@@ -5,7 +5,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -41,7 +40,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TableView fx:id="tblFlights" opacity="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <TableView fx:id="tblFlights" opacity="1" prefHeight="429.0" prefWidth="1546.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="flightID" text="Flight No" />
                 <TableColumn fx:id="destination" text="Destination" />
@@ -55,7 +54,7 @@
             </TableView>
          </children>
       </GridPane>
-      <GridPane fx:id="gpNotifications" layoutY="528.0" prefHeight="218.0" prefWidth="1556.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <GridPane fx:id="gpNotifications" layoutY="528.0" prefHeight="210.0" prefWidth="1546.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -64,7 +63,6 @@
         </rowConstraints>
          <children>      
             <TextField fx:id="txtNotifications" alignment="CENTER" disable="true" opacity="1" text="SZY105 BOARDING AT GATE 5" />
-            <Label fx:id="lblDebug" text="debug" />
             <ImageView fx:id="imgAirlines" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </GridPane>
