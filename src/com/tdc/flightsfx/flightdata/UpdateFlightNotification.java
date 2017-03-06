@@ -34,7 +34,7 @@ public class UpdateFlightNotification {
                 if (currentRow > doc.getRowCount()) {
                         currentRow = 0;
                     }
-                       view.scrollTo(16);     
+                
                     try {
                         view.getSelectionModel().select(currentRow);
 
