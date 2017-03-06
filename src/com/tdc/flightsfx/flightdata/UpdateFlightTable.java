@@ -1,6 +1,6 @@
 package com.tdc.flightsfx.flightdata;
 
-import com.tdc.flightsfx.connect.Dbconnection;
+import com.tdc.flightsfx.connect.DbConnection;
 import com.tdc.flightsfx.ui.FXMLDocumentController;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,7 +28,7 @@ public class UpdateFlightTable {
     private final Properties prop = new Properties();
     private FileInputStream in = null;
     
-    private Dbconnection connection = null;
+    private DbConnection connection = null;
     private Connection con;
     private String url,username,password;
 
@@ -52,12 +52,12 @@ public class UpdateFlightTable {
         }
     }
 
-    private final ObservableList<FlightInfo> flightList = FXCollections.observableArrayList();
+    private final ObservableList <FlightInfo> flightList = FXCollections.observableArrayList();
 
     /* Gets data from SQL database and populates into ObservableList */
     public void getTableData(FXMLDocumentController controller) throws SQLException, ParseException, IOException {
         
-        connection = new Dbconnection(url,username,password);
+        connection = new DbConnection(url,username,password);
         
         con = connection.connect();
 

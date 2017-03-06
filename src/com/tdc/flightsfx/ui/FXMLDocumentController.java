@@ -3,6 +3,7 @@ package com.tdc.flightsfx.ui;
 import com.tdc.flightsfx.flightdata.NumberofFlights;
 import com.tdc.flightsfx.flightdata.UpdateFlightTable;
 import com.tdc.flightsfx.flightdata.FlightInfo;
+import com.tdc.flightsfx.flightdata.FlightListScroll;
 import com.tdc.flightsfx.flightdata.UpdateFlightNotification;
 import com.tdc.flightsfx.flightdata.statusColor;
 import java.io.IOException;
@@ -73,7 +74,8 @@ public class FXMLDocumentController implements Initializable {
         Timer timer = new Timer();
         UpdateFlightTable flightTT = new UpdateFlightTable();
         udFlightNote = new UpdateFlightNotification(doc,tblFlights);
-        
+        FlightListScroll flScroll = new FlightListScroll(doc,tblFlights);
+        flScroll.scrollFlightList();
         setColumnWidth();
         try {
 
@@ -122,13 +124,13 @@ public class FXMLDocumentController implements Initializable {
          FadeTransition fadeIn = new FadeTransition(Duration.millis(2000), txtNotifications);
          FadeTransition stay = new FadeTransition(Duration.millis(12000), txtNotifications);
          FadeTransition fadeOut = new FadeTransition(Duration.millis(2000), txtNotifications);
-           fadeIn.setFromValue(0);
-            fadeIn.setToValue(1);
-            stay.setFromValue(1);
-            stay.setToValue(1);
-            fadeOut.setFromValue(1);
-            fadeOut.setToValue(0);
+         
+         fadeIn.setFromValue(0); fadeIn.setToValue(1);         
+         stay.setFromValue(1); stay.setToValue(1);  
+         fadeOut.setFromValue(1); fadeOut.setToValue(0);
+            
          fade.getChildren().addAll(fadeIn, stay, fadeOut); 
+         
          fade.play();
         
     }

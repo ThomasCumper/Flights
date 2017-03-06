@@ -14,7 +14,6 @@ public class UpdateFlightNotification {
 
     private TableView<FlightInfo> view;
     private FXMLDocumentController doc;
-    private Timer timer = new Timer();
 
     private static int currentRow = 0;
     private static String currentFlight = null;
@@ -35,7 +34,7 @@ public class UpdateFlightNotification {
                 if (currentRow > doc.getRowCount()) {
                         currentRow = 0;
                     }
-                            
+                       view.scrollTo(16);     
                     try {
                         view.getSelectionModel().select(currentRow);
 
@@ -43,59 +42,22 @@ public class UpdateFlightNotification {
                                 setNotification();
                                 currentRow++;
                         } else if(!checkStatus(view.getSelectionModel().getSelectedItem().getStatus()) && currentRow == 0){
-                                setBlank();
+                                setDefault();
                                 currentRow++;
                         }else{
                             currentRow=0;
                             run();
                         }
                         
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
+                    } catch (NullPointerException ex) {
+                        setDefault(); // set to default notification if no list exists
                     }
 
             }
- });
+        });
         
     }
-    public void updateNotification2() {
-
-        timer.scheduleAtFixedRate(new TimerTask() {
-
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-
-                    if (currentRow > doc.getRowCount()) {
-                        currentRow = 0;
-                    }
-                            
-                    try {
-                        view.getSelectionModel().select(currentRow);
-
-                        if (checkStatus(view.getSelectionModel().getSelectedItem().getStatus())) {
-                                setNotification();
-                                currentRow++;
-                        } else if(!checkStatus(view.getSelectionModel().getSelectedItem().getStatus()) && currentRow == 0){
-                                setBlank();
-                                currentRow++;
-                        }else{
-                            currentRow=0;
-                            run();
-                        }
-                        
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
-                        doc.setUpdateNotificationStyle("-fx-background-color: rgb(2, 119, 4);");
-                        doc.updateNotification("null");
-                    }
-
-                });
-            }
-        }, 0, 16000);
-
-    }
-
+  
     private void setNotification() {
 
         doc.updateNotification(view.getSelectionModel().getSelectedItem().getFlightID()
@@ -107,7 +69,7 @@ public class UpdateFlightNotification {
         currentFlight = view.getSelectionModel().getSelectedItem().getFlightID();
     }
 
-    private void setBlank() {
+    private void setDefault() {
         
         doc.setUpdateNotificationStyle("-fx-background-color: Green;");
         doc.updateNotification("COSTA COFFEE");
