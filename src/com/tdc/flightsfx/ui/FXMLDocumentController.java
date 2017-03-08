@@ -1,6 +1,5 @@
 package com.tdc.flightsfx.ui;
 
-import com.tdc.flightsfx.flightdata.NumberofFlights;
 import com.tdc.flightsfx.flightdata.UpdateFlightTable;
 import com.tdc.flightsfx.flightdata.FlightInfo;
 import com.tdc.flightsfx.flightdata.FlightListScroll;
@@ -17,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.SequentialTransition;
-import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -42,8 +40,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private Label lblTime;
-    @FXML
-    private Label lblPages;
     @FXML
     public ImageView imgAirlines;
     @FXML
@@ -74,8 +70,6 @@ public class FXMLDocumentController implements Initializable {
         Timer timer = new Timer();
         UpdateFlightTable flightTT = new UpdateFlightTable();
         udFlightNote = new UpdateFlightNotification(doc,tblFlights);
-        FlightListScroll flScroll = new FlightListScroll(doc,tblFlights);
-        flScroll.scrollFlightList();
         setColumnWidth();
         try {
 
@@ -95,7 +89,7 @@ public class FXMLDocumentController implements Initializable {
                         }
                     });
                 }
-            }, 0, 16000);
+            }, 0, 15000);
 
             Time time = new Time();
             time.getCurrentTime(this);
@@ -141,10 +135,6 @@ public class FXMLDocumentController implements Initializable {
     
     }
 
-    public void updatePageLabel(String pages) {
-
-        lblPages.setText(pages);
-    }
             
     /*Populates Flight tableView*/
     public void populateTable(ObservableList list) {
@@ -156,8 +146,8 @@ public class FXMLDocumentController implements Initializable {
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
         tblFlights.setItems(list);
         updateCellColor();
-        getNumberofRows(tblFlights);
         udFlightNote.updateNotification();
+        scrollList();
     }
 
     private void setColumnWidth() {
@@ -190,10 +180,10 @@ public class FXMLDocumentController implements Initializable {
         return size >1 ? size : 0;
     }
 
-    private void getNumberofRows(TableView tblFlights){
+    private void scrollList(){
         
-        NumberofFlights NoOfFlights = new NumberofFlights (tblFlights.getItems().size(),doc);
-  
+         FlightListScroll flScroll = new FlightListScroll(doc,tblFlights);
+         flScroll.scroll();
+ 
     }
-
 }
