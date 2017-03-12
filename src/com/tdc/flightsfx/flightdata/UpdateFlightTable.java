@@ -37,7 +37,7 @@ public class UpdateFlightTable {
     
     {
         try {
-            in = new FileInputStream("G:\\Google Drive\\flightFX.properties");
+            in = new FileInputStream("properties/flightFX.properties");
             prop.load(in);
             in.close();
             

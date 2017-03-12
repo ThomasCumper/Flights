@@ -116,7 +116,7 @@ public class FXMLDocumentController implements Initializable {
         
          SequentialTransition fade = new SequentialTransition();
          FadeTransition fadeIn = new FadeTransition(Duration.millis(2000), txtNotifications);
-         FadeTransition stay = new FadeTransition(Duration.millis(12000), txtNotifications);
+         FadeTransition stay = new FadeTransition(Duration.millis(11000), txtNotifications);
          FadeTransition fadeOut = new FadeTransition(Duration.millis(2000), txtNotifications);
          
          fadeIn.setFromValue(0); fadeIn.setToValue(1);         
