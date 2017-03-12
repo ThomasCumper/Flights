@@ -77,7 +77,7 @@ public class FlightInfo {
         return status.get();
     }
 
-    public String setStatus() throws SQLException {
+    public void setStatus() throws SQLException {
 
         try {
 
@@ -87,7 +87,6 @@ public class FlightInfo {
         } catch (ParseException ex) {
             System.out.println(ex.getMessage());
         }
-        return status.get();
     }
     
 }
