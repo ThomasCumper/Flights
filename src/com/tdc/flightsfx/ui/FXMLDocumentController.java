@@ -77,16 +77,8 @@ public class FXMLDocumentController implements Initializable {
                 @Override
                 public void run() {
                     Platform.runLater(() -> {
-                        try {
                             tblFlights.getItems().clear();
                             flightTT.getTableData(doc);
-                        } catch (SQLException | ParseException ex) {
-                            System.out.println(ex.getMessage());
-                        } catch (IOException ex) {
-                            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (IndexOutOfBoundsException ex){
-                            System.out.println("IndexOutOfBoundsException : "+ex.getMessage());
-                        }
                     });
                 }
             }, 0, 15000);
@@ -95,7 +87,7 @@ public class FXMLDocumentController implements Initializable {
             time.getCurrentTime(this);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            System.out.println(ex.getClass().getSimpleName()+" - "+ex.getMessage());
         }
     }
 
@@ -173,7 +165,7 @@ public class FXMLDocumentController implements Initializable {
             };
         });
     }
-    
+
     public int getRowCount(){
         
         int size = tblFlights.getItems().size();

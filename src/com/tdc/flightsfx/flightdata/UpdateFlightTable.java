@@ -9,8 +9,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +27,6 @@ public class UpdateFlightTable {
     private FileInputStream in = null;
     
     private DbConnection connection = null;
-    private Connection con;
     private String url,username,password;
 
     private CallableStatement stmt = null;
@@ -37,7 +34,8 @@ public class UpdateFlightTable {
     
     {
         try {
-            in = new FileInputStream("properties/flightFX.properties");
+          //  in = new FileInputStream("properties/flightFX.properties");
+              in = new FileInputStream("c:/properties/flightFX.properties");
             prop.load(in);
             in.close();
             
@@ -55,11 +53,10 @@ public class UpdateFlightTable {
     private final ObservableList <FlightInfo> flightList = FXCollections.observableArrayList();
 
     /* Gets data from SQL database and populates into ObservableList */
-    public void getTableData(FXMLDocumentController controller) throws SQLException, ParseException, IOException {
+    public void getTableData(FXMLDocumentController controller){
         
         connection = new DbConnection(url,username,password);
-        
-        con = connection.connect();
+       try(Connection con = connection.connect()){
 
         stmt = con.prepareCall("{CALL `Flights`.`sp_Select_All_Flights`}");
         stmt.execute();
@@ -78,14 +75,10 @@ public class UpdateFlightTable {
                     controller
             ));
         }
-
-        if (con != null) 
-            con.close();
-        if (stmt != null) 
-            stmt.close();
-        if (rs != null) 
-            rs.close();
-        
+       }catch(SQLException | IOException ex){
+           System.out.println(ex.getClass().getSimpleName()+" - "+ex.getMessage());
+       }
+             
         controller.populateTable(flightList);
     }
     
